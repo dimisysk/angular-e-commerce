@@ -1,6 +1,6 @@
 <h4>User Login</h4>
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-2 w-50">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-2 w-25 ">
   <div class="form-group">
     <label for="username">Username:</label>
     <input
@@ -39,8 +39,18 @@
   <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Login</button>
 
   @if (invalidLogin) {
-    <div class="alert alert-danger mt-2">
-      <strong>Error:</strong> Invalid username or password.
+    <div class="alert alert-danger">
+      <div>
+        <strong>Error</strong>
+        Invalid username or password
+        <strong>Click </strong>
+        <a
+          role="button"
+          routerLink="/registration">
+           here
+        </a>
+        to register
+      </div>
     </div>
   }
 </form>

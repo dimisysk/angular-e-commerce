@@ -1,0 +1,30 @@
+/* Βασικό στυλ για το container */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Εξασφαλίζει ότι το ύψος καλύπτει όλο το viewport */
+  }
+  
+  .content-container {
+    flex: 1; /* Κάνει το περιεχόμενο να καταλαμβάνει όλο τον διαθέσιμο χώρο */
+    padding: 1rem; /* Προαιρετική απόσταση γύρω από το περιεχόμενο */
+    overflow-y: auto; /* Για κάθετη κύλιση αν το περιεχόμενο είναι μεγάλο */
+  }
+  
+  app-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Εξασφαλίζει ότι το Navbar είναι μπροστά από άλλα στοιχεία */
+    background-color: white; /* Δίνει φόντο στο Navbar */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Προαιρετική σκιά */
+  }
+  
+  app-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 1000; /* Εξασφαλίζει ότι το Footer είναι μπροστά από άλλα στοιχεία */
+    background-color: white; /* Δίνει φόντο στο Footer */
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1); /* Προαιρετική σκιά */
+    padding: 1rem;
+  }
+  

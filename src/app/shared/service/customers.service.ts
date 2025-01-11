@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Customer } from '../interfaces/customer';
+import { User } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +12,19 @@ export class CustomersService {
 
   constructor(private http: HttpClient) {}
 
-  getAllCustomers(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.baseUrl);
+  getAllCustomers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl);
   }
 
-  getCustomerById(id: number): Observable<Customer> {
-    return this.http.get<Customer>(`${this.baseUrl}/${id}`);
+  getCustomerById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
-  createCustomer(customer: Customer): Observable<Customer> {
-    return this.http.post<Customer>(this.baseUrl, customer);
-  }
 
-  updateCustomer(id: number, customer: Customer): Observable<Customer> {
-    return this.http.put<Customer>(`${this.baseUrl}/${id}`, customer);
+  
+
+  updateCustomer(id: number, customer: User): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/${id}`, customer);
   }
 
   deleteCustomer(id: number): Observable<void> {

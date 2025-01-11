@@ -1,18 +1,19 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/service/authe.service';
-import {jwtDecode} from 'jwt-decode'
-import { LoggedInUser } from 'src/app/shared/interfaces/customer';
+import { jwtDecode } from 'jwt-decode';
+import { LoggedInUser } from 'src/app/shared/interfaces/user';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Credentials } from 'src/app/shared/interfaces/user';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, RouterOutlet],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   authService = inject(AuthService);
@@ -28,31 +29,37 @@ export class LoginComponent {
     ]),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern(
-        '^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{8,}$'
-      ),
+      Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{8,}$'),
     ]),
   });
 
   onSubmit() {
-    const credentials = this.form.value;
-    if (credentials.username && credentials.password) {
-      this.authService.login(credentials.username, credentials.password).subscribe({
+    const credentials = this.form.value as Credentials;
+    if (credentials) {
+      this.authService.login(credentials).subscribe({
         next: (response) => {
-          const token = response.jwtToken;
-          this.authService.saveToken(token);
+          const jwtToken = response.token;
+          localStorage.setItem('jwtToken', jwtToken);
 
           const decodedToken = this.authService.decodeToken();
-          console.log('Decoded Token:', decodedToken);
+          if (decodedToken) {
+            console.log('decoded token', decodedToken);
+            this.authService.user.set({
+              username: decodedToken.sub,
+              role: decodedToken.role,
+            });
 
-          if (decodedToken?.role === 'CUSTOMER') {
-            this.router.navigate(['customer-dashboard']);
-          } else if (decodedToken?.role === 'ADMIN') {
-            this.router.navigate(['admin-dashboard']);
+            if (decodedToken.role === 'CUSTOMER') {
+              this.router.navigate(['customer-dashboard']);
+            } else if (decodedToken.role === 'ADMIN') {
+              this.router.navigate(['admin-dashboard']);
+            }
+          } else {
+            console.error('Failed to decode token');
           }
         },
-        error: (error) => {
-          console.error('Login Error:', error);
+        error: (response) => {
+          console.error('Login Error', response);
           this.invalidLogin = true;
         },
       });

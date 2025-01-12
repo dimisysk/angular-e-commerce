@@ -6,6 +6,12 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyPolicyComponent } from './components/privacy-policy/privacy-policy.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { DashboardComponent } from './crud/dashboard/dashboard.component';
+import { CreateComponent } from './crud/create/create.component';
+import { ReadComponent } from './crud/read/read.component';
+import { UpdateComponent } from './crud/update/update.component';
+import { DeleteComponent } from './crud/delete/delete.component';
+import { CustomerListComponent } from './customer-list/customer-list.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,5 +22,28 @@ export const routes: Routes = [
   {path: 'footer', component: FooterComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'contact', component: ContactComponent},
+  {
+    path: 'crud/dashboard',
+    component: DashboardComponent
+    
+  },
+  {
+    path: 'crud/create',
+    component: CreateComponent
+  },
+  {
+    path: 'crud/read',
+    component: ReadComponent,
+    
+  },
+  {
+    path: 'crud/update',
+    component: UpdateComponent,
+  },
+  {
+    path: 'crud/delete',
+    component: DeleteComponent,
+  },
+  {path: 'customer/get-all', component: CustomerListComponent},
   { path: '**', redirectTo: '' }
 ];

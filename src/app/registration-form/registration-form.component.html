@@ -1,24 +1,27 @@
 <h4 class="text-center mb-4">User Registration</h4>
 
-<div class="d-flex gap-3">
+<div class="d-flex justify-content-center align-items-center" style="max-height: 100vh;">
+
+
+
   @if (registrationStatus.message === "Not attempted yet") {
     <form
       [formGroup]="form"
-      class="d-flex flex-column w-25 justify-content-center"
-    >
+      class="d-flex flex-column w-25 justify-content-center">
+
+      
+
       <mat-form-field>
         <mat-label>Username</mat-label>
         <input
           matInput
           type="text"
           (blur)="checkDuplicateUsername()"
-          formControlName="username"
-        />
+          formControlName="username" />
         @if (form.get("username").hasError("duplicateUsername")) {
           <mat-error>Username is already registered</mat-error>
         } @else if (
-          form.get("username").hasError("required") &&
-          form.get("username").touched
+          form.get("username").hasError("required") && form.get("username").touched
         ) {
           <mat-error>Email is missing or invalid</mat-error>
         } @else if (form.get("username").hasError("pattern")) {
@@ -27,14 +30,14 @@
       </mat-form-field>
 
       <div class="d-flex gap-3">
+
         <mat-form-field>
           <mat-label>Password</mat-label>
           <input
             matInput
             type="password"
             formControlName="password"
-            #passwordInput
-          />
+            #passwordInput />
           <button
             mat-icon-button
             matSuffix
@@ -42,13 +45,10 @@
             (click)="
               passwordInput.type =
                 passwordInput.type === 'password' ? 'text' : 'password'
-            "
-          >
+            ">
             <mat-icon>
               {{
-                passwordInput.type === "password"
-                  ? "visibility_off"
-                  : "visibility"
+                passwordInput.type === "password" ? "visibility_off" : "visibility"
               }}
             </mat-icon>
           </button>
@@ -62,8 +62,7 @@
             matInput
             type="password"
             formControlName="confirmPassword"
-            #confirmPasswordInput
-          />
+            #confirmPasswordInput />
           <button
             mat-icon-button
             matSuffix
@@ -71,8 +70,7 @@
             (click)="
               confirmPasswordInput.type =
                 confirmPasswordInput.type === 'password' ? 'text' : 'password'
-            "
-          >
+            ">
             <mat-icon>
               {{
                 confirmPasswordInput.type === "password"
@@ -90,31 +88,41 @@
             <mat-error>Confirmed Password is missing or invalid</mat-error>
           }
         </mat-form-field>
+
       </div>
 
       <div class="d-flex gap-3">
         <mat-form-field>
           <mat-label>Firstname</mat-label>
-          <input matInput type="text" formControlName="firstName" />
+          <input
+            matInput
+            type="text"
+            formControlName="firstName" />
           @if (form.get("firstName").invalid && form.get("firstName").touched) {
             <mat-error>Firstname is required</mat-error>
           }
         </mat-form-field>
-
+    
         <mat-form-field>
           <mat-label>Lastname</mat-label>
-          <input matInput type="text" formControlName="lastName" />
+          <input
+            matInput
+            type="text"
+            formControlName="lastName" />
           @if (form.get("lastName").invalid && form.get("lastName").touched) {
             <mat-error>Lastname is required</mat-error>
           }
         </mat-form-field>
       </div>
-
+      
       <div class="d-flex gap-3">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" />
-          @if (form.get("email").invalid && form.get("email").touched) {
+          <input
+            matInput
+            type="email"
+            formControlName="email" />
+       @if (form.get("email").invalid && form.get("email").touched) {
             <mat-error>Email is required</mat-error>
           }
         </mat-form-field>
@@ -199,10 +207,11 @@
         mat-flat-button
         color="primary"
         [disabled]="form.invalid"
-        (click)="onSubmit(form.value)"
-      >
+        (click)="onSubmit(form.value)">
         Register
       </button>
     </form>
-  }
+}
+
 </div>
+

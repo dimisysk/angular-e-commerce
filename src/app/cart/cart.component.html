@@ -1,0 +1,11 @@
+<div class="cart-container">
+    <h1>Your Cart</h1>
+    <div *ngIf="cart.length === 0">Your cart is empty!</div>
+    <div *ngFor="let product of cart" class="cart-item">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <!-- <p><strong>{{ product.price | currency }}</strong></p> -->
+      <button (click)="removeFromCart(product.id)">Remove</button>
+    </div>
+  </div>
+  

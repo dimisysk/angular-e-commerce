@@ -59,7 +59,7 @@ export class LoginComponent {
                 }
               });
             } else if (decodedToken.role === 'ADMIN') {
-              this.router.navigate(['admin-dashboard']);
+              this.router.navigate(['customer/get-all']);
             }
           } else {
             console.error('Failed to decode token');

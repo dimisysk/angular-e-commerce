@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,Inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from 'src/app/shared/service/authe.service';
 
 @Component({
   selector: 'app-crud-navbar',
@@ -8,5 +9,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './crud-navbar.component.css'
 })
 export class CrudNavbarComponent {
+  userRole: string | null = null;
 
+  constructor(public authService: AuthService) {
+  }
 }

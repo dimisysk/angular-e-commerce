@@ -35,8 +35,30 @@ export interface CustomerReadOnlyDTO {
   };
   uuid: string;
   id: number;
-  discountCardNumber: number;
+  discountCardNumber: string;
 }
+
+export interface CustomerInsertDTO {
+  id: number; // Προσθήκη του ID του πελάτη
+  user: {
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    address: string;
+    addressNumber: string;
+    city: string;
+    zip: string;
+    ssn: string;
+    gender: string;
+    role: string;
+    isActive: boolean;
+  };
+  discountCardNumber: string;
+}
+
 
 export interface PaginatedResponse<T> {
   content: T[];

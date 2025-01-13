@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User,PaginatedResponse } from '../interfaces/user';
+import { User,PaginatedResponse, CustomerInsertDTO } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -31,9 +31,10 @@ export class CustomersService {
 
 
 
-  updateCustomer(id: number, customer: User): Observable<CustomerReadOnlyDTO> {
-    return this.http.put<CustomerReadOnlyDTO>(`${this.baseUrl}/${id}`, customer);
+  updateCustomer(id: number, customer: CustomerInsertDTO): Observable<CustomerInsertDTO> {
+    return this.http.put<CustomerInsertDTO>(`${this.baseUrl}/${id}`, customer);
   }
+  
 
   deleteCustomer(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);

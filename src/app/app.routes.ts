@@ -37,7 +37,7 @@ export const routes: Routes = [
     
   },
   {
-    path: 'crud/update',
+    path: 'customers/update/:id',
     component: UpdateComponent,
   },
   {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomersService } from '../shared/service/customers.service'; 
 import { CustomerReadOnlyDTO } from '../shared/interfaces/user'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-list',
@@ -11,7 +12,9 @@ export class CustomerListComponent implements OnInit {
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
 
-  constructor(private customersService: CustomersService) {}
+  constructor(private customersService: CustomersService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadCustomers();
@@ -71,6 +74,7 @@ export class CustomerListComponent implements OnInit {
   
 
   editCustomer(customer: CustomerReadOnlyDTO): void {
-    console.log('Edit customer', customer);
+    // Ανακατεύθυνση στη φόρμα επεξεργασίας με βάση το customer.id
+    this.router.navigate(['/customers/update/', customer.id]);
   }
 }

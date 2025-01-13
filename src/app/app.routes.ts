@@ -12,6 +12,9 @@ import { ReadComponent } from './crud/read/read.component';
 import { UpdateComponent } from './crud/update/update.component';
 import { DeleteComponent } from './crud/delete/delete.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { customerGuard } from './shared/guards/customer.guard';
+import { adminGuard } from './shared/guards/adnin.guard';
+import { customerOrAdminGuard } from './shared/guards/customer-or-admin.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,31 +22,37 @@ export const routes: Routes = [
   { path: 'about-us', component: AboutUsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationFormComponent },
-  {path: 'footer', component: FooterComponent},
-  {path: 'privacy-policy', component: PrivacyPolicyComponent},
-  {path: 'contact', component: ContactComponent},
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'contact', component: ContactComponent },
   {
-    path: 'crud/dashboard',
-    component: DashboardComponent
-    
+    path: 'customer/dashboard',
+    component: DashboardComponent,
+    canActivate: [ customerOrAdminGuard],
   },
   {
     path: 'crud/create',
-    component: CreateComponent
+    component: CreateComponent,
+    canActivate: [adminGuard],
   },
   {
     path: 'crud/read',
     component: ReadComponent,
-    
+    canActivate: [adminGuard],
   },
   {
     path: 'customers/update/:id',
     component: UpdateComponent,
+    canActivate: [adminGuard],
   },
   {
     path: 'crud/delete',
     component: DeleteComponent,
+    canActivate: [adminGuard],
   },
-  {path: 'customer/get-all', component: CustomerListComponent},
-  { path: '**', redirectTo: '' }
+  {
+    path: 'customer/get-all',
+    component: CustomerListComponent,
+    canActivate: [adminGuard],
+  },
+  { path: '**', redirectTo: 'not-authorized' },
 ];

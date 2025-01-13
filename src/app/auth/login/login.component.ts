@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/service/authe.service';
 import { jwtDecode } from 'jwt-decode';
@@ -11,7 +11,7 @@ import { Credentials } from 'src/app/shared/interfaces/user';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, RouterOutlet],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -50,7 +50,14 @@ export class LoginComponent {
             });
 
             if (decodedToken.role === 'CUSTOMER') {
-              this.router.navigate(['customer-dashboard']);
+              console.log('Navigating to /customer-dashboard');
+              this.router.navigate(['/customer/dashboard']).then((success) => {
+                if (success) {
+                  console.log('Navigation successful!');
+                } else {
+                  console.error('Navigation failed!');
+                }
+              });
             } else if (decodedToken.role === 'ADMIN') {
               this.router.navigate(['admin-dashboard']);
             }

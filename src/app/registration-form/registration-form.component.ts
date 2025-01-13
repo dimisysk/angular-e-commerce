@@ -113,13 +113,14 @@ export class RegistrationFormComponent {
 
         this.registrationStatus = {
           success: true,
-          message: `Customer ${response.user.firstName} ${response.user.lastName} registered successfully! Discount Card Number: ${response.discountCardNumber}`,
+          message: `Customer ${response.user.firstName} ${response.user.lastName} registered successfully! `,
         };
-        this.router.navigate(['home']);
+        this.router.navigate(['/customer/dashboard']);
       },
       error: (error) => {
         const code = error.error?.code || 'UnknownError';
         const message = error.error?.message || 'An unexpected error occurred';
+        alert(error);
         console.error('Error registering customer')
         // console.error('Error registering customer:', code, message);
 

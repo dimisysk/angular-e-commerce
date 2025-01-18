@@ -15,6 +15,7 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { customerGuard } from './shared/guards/customer.guard';
 import { adminGuard } from './shared/guards/adnin.guard';
 import { customerOrAdminGuard } from './shared/guards/customer-or-admin.guard';
+import { NotAuthorizedComponent } from './not-authorized/not-authorized.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -54,5 +55,6 @@ export const routes: Routes = [
     component: CustomerListComponent,
     canActivate: [adminGuard],
   },
+  {path: 'not-authorized', component: NotAuthorizedComponent},
   { path: '**', redirectTo: 'not-authorized' },
 ];
